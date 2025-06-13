@@ -151,6 +151,7 @@ nextBtn.addEventListener("click", () => {
         selected: selectedRaw,
         correct: currentQ.answer,
         question: currentQ.question
+        explanation: currentQ.explanation  // ← store it
       };
 
 
@@ -342,6 +343,7 @@ function showResult() {
           <p><strong>Q${index + 1}:</strong> ${entry.question}</p>
           <p><strong>Your Answer:</strong><br>${entry.selected.join("<br>")}</p>
           <p><strong>Correct Answer:</strong><br>${entry.correct.join("<br>")}</p>
+          <p><strong>Explanation:</strong><br>${entry.explanation || '—'}</p>
           <p>${isCorrect ? "✅ Correct" : "❌ Incorrect"}</p>
         </div>
       `;
