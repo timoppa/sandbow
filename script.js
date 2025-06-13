@@ -168,7 +168,14 @@ nextBtn.addEventListener("click", () => {
       ? `<p style="color:green;">✅ Correct!</p>`
       : `<p style="color:red;">❌ Incorrect.</p>
          <p>Correct Answer:<br><strong>${currentQ.answer.join("<br>")}</strong></p>`;
+    
+    
+    // ⬇️ Add this below the feedback
+    if (currentQ.explanation) {
+      resultEl.innerHTML += `<p class="explanation"><strong>Explanation:</strong> ${currentQ.explanation}</p>`;
+    }
 
+    
     if (isCorrect) score++;
     showingFeedback     = true;
     nextBtn.textContent = (currentQuestion < questions.length - 1)
