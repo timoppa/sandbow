@@ -338,12 +338,18 @@ function showResult() {
         entry.selected.length === entry.correct.length &&
         entry.correct.every(ans => entry.selected.includes(ans));
     
+      // build an explanation block only if one exists
+      const explanationHTML = entry.explanation
+        ? `<p><strong>Explanation:</strong><br>${entry.explanation}</p>`
+        : "";
+    
       const questionHTML = `
         <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 12px;">
           <p><strong>Q${index + 1}:</strong> ${entry.question}</p>
           <p><strong>Your Answer:</strong><br>${entry.selected.join("<br>")}</p>
           <p><strong>Correct Answer:</strong><br>${entry.correct.join("<br>")}</p>
           <p>${isCorrect ? "✅ Correct" : "❌ Incorrect"}</p>
+          ${explanationHTML}
         </div>
       `;
     
