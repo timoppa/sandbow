@@ -150,7 +150,7 @@ nextBtn.addEventListener("click", () => {
       userAnswers[currentQuestion] = {
         selected: selectedRaw,
         correct: currentQ.answer,
-        question: currentQ.question
+        question: currentQ.question,
         explanation: currentQ.explanation
       };
 
