@@ -151,7 +151,6 @@ nextBtn.addEventListener("click", () => {
         selected: selectedRaw,
         correct: currentQ.answer,
         question: currentQ.question
-        explanation: currentQ.explanation  // ← store it
       };
 
 
@@ -364,4 +363,3 @@ function showResult() {
 finishBtn.style.display = "none";
 loadQuestion();
 startTimer();
-
