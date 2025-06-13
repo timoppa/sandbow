@@ -344,7 +344,6 @@ function showResult() {
           <p><strong>Your Answer:</strong><br>${entry.selected.join("<br>")}</p>
           <p><strong>Correct Answer:</strong><br>${entry.correct.join("<br>")}</p>
           <p>${isCorrect ? "✅ Correct" : "❌ Incorrect"}</p>
-          ${explanationHTML}
         </div>
       `;
     
