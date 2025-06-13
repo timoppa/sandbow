@@ -98,6 +98,7 @@ function loadQuestion() {
 }
 
 
+
 // ─── Timer ────────────────────────────────────────────────────────────────────
 function updateTimerDisplay() {
   const h = Math.floor(totalTimeSeconds / 3600);
