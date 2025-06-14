@@ -68,8 +68,8 @@ const questions = [
     "answer": [
       "gcloud compute security-policies rules update 1000 \\\n-- security-policy from-fastly \\ \n-- src-ip-ranges * \\\n-- action \"allow\""
     ],
-    "multiple": false
-    "explanation": "NOTE!!!: The suggested correct answer above is from Exam Topics. There are comments about the answer in Exam Topics for this question is wrong and it should have been gcloud compute security-policies rules update 1000 \\\n-- security-policy hlr-policy \\ \n-- expression \"evaluatePreconfiguredExpr ('sourceiplist-fastly')\" \\\n-- action \"allow\". It is up to you to decide which option you pick because nobody knows the right answer to this. Fun Fact: ChatGPT, Perplexity, Gemini and Grok are all saying gcloud compute security-policies rules update 1000 \\\n-- security-policy hlr-policy \\ \n-- expression \"evaluatePreconfiguredExpr ('sourceiplist-fastly')\" \\\n-- action \"allow\" is the correct answer. "
+    "multiple": false,
+    "explanation": "NOTE!!!: The suggested correct answer above is from Exam Topics. There are comments about the answer in Exam Topics for this question is wrong and it should have been gcloud compute security-policies rules update 1000 \\\n-- security-policy hlr-policy \\ \n-- expression \"evaluatePreconfiguredExpr ('sourceiplist-fastly')\" \\\n-- action \"allow\". It is up to you to decide which option you pick because nobody knows the right answer to this. Fun Fact: ChatGPT, Perplexity, Gemini and Grok are all saying gcloud compute security-policies rules update 1000 \\\n-- security-policy hlr-policy \\ \n-- expression \"evaluatePreconfiguredExpr ('sourceiplist-fastly')\" \\\n-- action \"allow\" is the correct answer."
   },
 ];
 
