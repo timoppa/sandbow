@@ -135,36 +135,37 @@ function loadQuestion() {
   optionsEl.innerHTML    = "";
 
   shuffled.forEach(option => {
-    const li      = document.createElement("li");
-    const isImage = option.match(/\.(jpeg|jpg|gif|png|webp)$/i);
-
-    li.innerHTML = `
-      <label class="option">
-        <input 
-          type="${inputType}" 
-          name="option" 
-          value="${option.replace(/"/g, '&quot;')}"
-        >
-        <span>
-          ${isImage
-            ? `<img src="${option}" …>`
-            : option}
-        </span>
-      </label>`;
-
-
-    //li.innerHTML = `
-      //<label class="option">
-        //<input type="${inputType}" name="option" value="${option}">
-        //<span>
-          //${isImage
-            //? `<img src="${option}" alt="Option image" style="max-width:100%;height:auto;">`
-            //: option}
-        //</span>
-      //</label>`;
-
+    const li    = document.createElement('li');
+    const label = document.createElement('label');
+    label.className = 'option';
+  
+    const input = document.createElement('input');
+    input.type  = inputType;
+    input.name  = 'option';
+    input.value = option;
+  
+    const span = document.createElement('span');
+    if (option.match(/\.(jpe?g|png|gif|webp)$/i)) {
+      const img = document.createElement('img');
+      img.src    = option;
+      img.alt    = 'Option image';
+      img.style.maxWidth = '100%';
+      img.style.height   = 'auto';
+      span.appendChild(img);
+    } else {
+      span.textContent = option;
+    }
+  
+    input.addEventListener('change', () => {
+      document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      label.classList.add('selected');
+    });
+  
+    label.append(input, span);
+    li.appendChild(label);
     optionsEl.appendChild(li);
   });
+
 
   // wire up the “selected” highlight
   optionsEl.querySelectorAll(`input[name="option"]`).forEach(input => {
