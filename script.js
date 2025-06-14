@@ -380,6 +380,28 @@ function displayScoreHistory() {
 }
 
 
+// Helper functions:
+
+function renderAnswerHTML(answers) {
+  return answers.map(ans => {
+    if (ans.match(/\.(jpe?g|png|gif|webp)$/i)) {
+      return `<img src="${ans}" alt="Answer image" style="max-width:100%;height:auto;margin:6px 0;">`;
+    }
+    return `<p>${ans}</p>`;
+  }).join("");
+}
+
+function renderQuestionHTML(text) {
+  return text.split('\n').map(line => {
+    const m = line.trim().match(/(https?:\/\/\S+\.(?:png|jpe?g|gif|webp))/i);
+    if (m) {
+      return `<img src="${m[1]}" alt="Question image" style="max-width:100%;height:auto;margin:12px 0;">`;
+    }
+    return `<p>${line.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>`;
+  }).join('');
+}
+
+
 // ─── Show Result & Restart ───────────────────────────────────────────────────
 function showResult() {
   clearInterval(countdownInterval);
@@ -395,7 +417,6 @@ function showResult() {
 
   displayScoreHistory();
   document.getElementById("scoreHistory").style.display = "block";
-
 
   document.getElementById("restartQuizBtn").addEventListener("click", () => {
     score = 0;
@@ -414,30 +435,31 @@ function showResult() {
   });
 
   const summaryDiv = document.getElementById("summaryPage");
-    summaryDiv.innerHTML = "<h3>Question Summary</h3>";
-    
-    userAnswers.forEach((entry, index) => {
-      const isCorrect = 
-        entry.selected.length === entry.correct.length &&
-        entry.correct.every(ans => entry.selected.includes(ans));
-    
-      // build an explanation block only if one exists
-      const explanationHTML = entry.explanation
-        ? `<p><strong>Explanation:</strong><br>${entry.explanation}</p>`
-        : "";
-    
-      const questionHTML = `
-        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 12px;">
-          <p><strong>Q${index + 1}:</strong> ${entry.question}</p>
-          <p><strong>Your Answer:</strong><br>${entry.selected.join("<br>")}</p>
-          <p><strong>Correct Answer:</strong><br>${entry.correct.join("<br>")}</p>
-          <p>${isCorrect ? "✅ Correct" : "❌ Incorrect"}</p>
-          ${explanationHTML}
-        </div>
-      `;
-    
-      summaryDiv.innerHTML += questionHTML;
-    });
+  summaryDiv.innerHTML = "<h3>Question Summary</h3>";
+
+  userAnswers.forEach((entry, index) => {
+    const isCorrect =
+      entry.selected.length === entry.correct.length &&
+      entry.correct.every(ans => entry.selected.includes(ans));
+
+    const explanationHTML = entry.explanation
+      ? `<p><strong>Explanation:</strong><br>${entry.explanation}</p>`
+      : "";
+
+    const questionHTML = `
+      <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 12px;">
+        <p><strong>Q${index + 1}:</strong></p>
+        ${renderQuestionHTML(entry.question)}
+        <p><strong>Your Answer:</strong><br>${renderAnswerHTML(entry.selected)}</p>
+        <p><strong>Correct Answer:</strong><br>${renderAnswerHTML(entry.correct)}</p>
+        <p>${isCorrect ? "✅ Correct" : "❌ Incorrect"}</p>
+        ${explanationHTML}
+      </div>
+    `;
+
+    summaryDiv.innerHTML += questionHTML;
+  });
+
     
     // Hide quiz and show summary
     document.getElementById("quiz").style.display = "none";
