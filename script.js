@@ -140,13 +140,28 @@ function loadQuestion() {
 
     li.innerHTML = `
       <label class="option">
-        <input type="${inputType}" name="option" value="${option}">
+        <input 
+          type="${inputType}" 
+          name="option" 
+          value="${option.replace(/"/g, '&quot;')}"
+        >
         <span>
           ${isImage
-            ? `<img src="${option}" alt="Option image" style="max-width:100%;height:auto;">`
+            ? `<img src="${option}" …>`
             : option}
         </span>
       </label>`;
+
+
+    //li.innerHTML = `
+      //<label class="option">
+        //<input type="${inputType}" name="option" value="${option}">
+        //<span>
+          //${isImage
+            //? `<img src="${option}" alt="Option image" style="max-width:100%;height:auto;">`
+            //: option}
+        //</span>
+      //</label>`;
 
     optionsEl.appendChild(li);
   });
